@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=NitroSense for Linux
+Name[es]=NitroSense para Linux
+GenericName=Fan & RGB control
+Comment=Control de ventiladores, modos de rendimiento y RGB del teclado (port de NitroSense para Acer Nitro/Predator)
+Comment[es]=Control de ventiladores, modos de rendimiento y RGB del teclado (port de NitroSense para Acer Nitro/Predator)
+Exec=/usr/local/bin/nitro-sense-gui
+Icon=preferences-system-power
+Categories=System;HardwareSettings;
+Keywords=fan;turbo;rgb;acer;nitro;thermal;
+Terminal=false
+StartupNotify=true

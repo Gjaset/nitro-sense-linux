@@ -1,0 +1,21 @@
+# Artefactos de compilación del módulo (kbuild)
+*.o
+*.o.*
+*.ko
+*.mod
+*.mod.c
+*.cmd
+*.symvers
+*.order
+.tmp_versions/
+Module.symvers
+modules.order
+
+# Binarios de usuario (se generan con `make`)
+/nitro
+/nitro-daemon
+/nsclient
+
+# Python
+__pycache__/
+*.pyc

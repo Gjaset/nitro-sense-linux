@@ -1,0 +1,29 @@
+[Unit]
+Description=NitroSense protocol daemon (port de NitroSense a Linux)
+Documentation=man:nitro-daemon(8)
+# Espera al módulo nitro_wmi (DKMS + modules-load.d)
+After=systemd-modules-load.service
+Wants=systemd-modules-load.service
+ConditionPathIsDirectory=/sys/bus/wmi/devices/7A4DDFE7-5B5D-40B4-8595-4408E0CC7F56-6
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/nitro-daemon
+RuntimeDirectory=nitro-sense
+StateDirectory=nitro-sense
+Restart=on-failure
+RestartSec=2
+
+# Endurecimiento: /sys sigue accesible (API fs); el registro y el socket en
+# /var/lib/nitro-sense y /run/nitro-sense son los únicos paths de escritura
+NoNewPrivileges=yes
+ProtectSystem=strict
+ReadWritePaths=/var/lib/nitro-sense /run/nitro-sense
+ProtectHome=yes
+PrivateTmp=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+RestrictSUIDSGID=yes
+
+[Install]
+WantedBy=multi-user.target
