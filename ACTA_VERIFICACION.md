@@ -151,6 +151,13 @@ sysfs) funcionaban, lo que ocultaba el fallo.
 `fan_mode=2`, status `0x00`. Turbo, brillo, RGB y modo Auto también devuelven
 `0x00` por el socket.
 
-**Pendiente**: `sudo ./install.sh` para sustituir la GUI instalada (la copia en
-`/usr/local/bin` aún es la v2) y limpiar las versiones antiguas de DKMS.
+**Falso negativo de `nitro-boot-check`**: el chequeo de DKMS buscaba
+`"installed"` antes del nombre del kernel, pero `dkms status` lo imprime al
+final (`nitro-wmi/0.4.4, 7.3.5-2-cachyos, x86_64: installed`). El módulo y
+DKMS estaban correctos; el script reportaba un fallo inexistente. Corregido el
+orden del patrón → **8/8 pruebas OK** tras el reinicio.
+
+**Instalación**: `sudo ./install.sh` ejecutado el 21-nov. GUI v3 en
+`/usr/local/bin` (md5 `0fd9b93e…`), DKMS solo `0.4.4` en 7.3.5-2 y 6.18.60-3-lts.
+Pendiente: reinstalar el `boot-check.sh` corregido en `/usr/local/bin`.
 

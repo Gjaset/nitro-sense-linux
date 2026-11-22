@@ -16,10 +16,12 @@ echo "kernel: $(uname -r)"
 echo "1) módulo kernel"
 if lsmod | grep -q "^nitro_wmi"; then ok "nitro_wmi cargado"; else bad "nitro_wmi NO cargado"; fi
 echo "2) DKMS"
-if dkms status 2>/dev/null | grep -q "nitro-wmi.*installed.*$(uname -r)"; then
+# Formato real: "nitro-wmi/0.4.4, 7.3.5-2-cachyos, x86_64: installed"
+if dkms status 2>/dev/null | grep -q "nitro-wmi.*, $(uname -r), .*installed"; then
 	ok "DKMS instalado para este kernel"
 else
 	bad "DKMS no instalado para $(uname -r)"
+	dkms status 2>/dev/null | grep -i nitro | sed 's/^/      /'
 fi
 echo "3) sysfs del módulo"
 if ls /sys/bus/wmi/devices/7A4DDFE7-*/nitro_wmi >/dev/null 2>&1; then
